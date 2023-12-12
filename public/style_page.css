@@ -1,0 +1,267 @@
+.left h3 {
+  font-size: 2.5rem;
+  cursor: pointer;
+  color: white;
+}
+.navbar {
+  background: rgb(186,243,255);
+  background: linear-gradient(90deg, rgba(186,243,255,1) 0%, rgba(98,170,255,1) 20%, rgba(186,243,255,1) 100%);
+  border-radius: 1rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  line-height: auto;
+  width: 80%;
+  margin: auto;
+}
+.right ul {
+  display: flex;
+  list-style: none;
+  padding-left:90px;
+}
+.right ul li a {
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  color: white;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 1s;
+}
+.right ul li a:hover {
+  background-color: #fff;
+  border-radius: 7px;
+  color: rgb(21, 91, 203);
+}
+@media screen and (max-width:805px) {
+  .list {
+      width: 100%;
+      height: 100vh;
+      background-color: rgb(21, 91, 203);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 4rem;
+      left: 100%;
+      transition: all 1s;
+  }
+}
+
+h1 {
+  background-color:rgba(98,170,255,1) ;
+}
+
+
+
+.login-container, .login-title-container, .buttons-container, .register-button, .footer {
+  width: 100%;
+}
+
+.login-title {
+  margin-top: 5%;
+  font-size: 50px;
+  animation: 0.5s ease-out 0s 1 slideInText;
+  color: rgba(98,170,255,1);
+}
+
+.buttons-container {
+  display: flex;
+  margin-top: 80px;
+}
+
+.login-pacient-button, .login-specialist-button {
+  width: 20%;
+  border: 1.5px solid gray;
+  height: 340px;
+  border-radius: 20%;
+  display: block;
+  transition: all 0.5s ease-in-out
+}
+
+
+.login-link {
+  display: flex;
+}
+
+.login-pacient-button:hover, .login-specialist-button:hover {
+  transform: scale(1.1, 1.1);
+  cursor: pointer;
+}
+
+.register-now {
+  position: relative;
+  margin-top: 40px;
+}
+
+.footer-text {
+  background: rgb(240, 240, 240);
+  margin-bottom: 0px;
+  color: gray;
+  padding-top: 40px;
+  padding-bottom: 90px;
+}
+
+.footer-space {
+  margin-top: 40px;
+  margin-bottom: 0;
+}
+
+
+/*For pacient profile*/
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 5 solid rgba(0, 0, 0, .125);
+  border-radius: .25rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);
+}
+
+.card-body {
+  flex: 1 1 auto;
+  min-height: 1px;
+  padding: 1rem;
+}
+
+
+.guttters-sm {
+  margin-left: -8px;
+  margin-right: -8px;
+}
+
+.gutters-sm>col, .gutters-sm>[class*=col-] {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.mb-3, .my-3 {
+  margin-bottom: 1rem !important;
+}
+
+.bg-gray-300 {background-color: #e2e8f0;}
+
+.h-100 {height: 100% !important;}
+
+.shadow-none {box-shadow: none!important;}
+
+.nav-h4 {padding-bottom: 0;}
+
+.list-info-title {
+  margin: auto;
+}
+
+.pop-up {
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  overflow: auto;
+  z-index: 3;
+  padding-top: 100px;
+  height: 100%;
+  width: 100%;
+}
+
+.pop-up-container {
+  width: 900px;
+  position: relative;
+  margin: auto;
+  padding: 0;
+  outline: 0;
+  border: 1px solid rgba(0, 0, 0, .2);
+  animation: pop-up-move 0.5s;
+}
+
+.pop-up-close {
+  right: 0;
+  padding-top: 10px;
+}
+
+.container#blur.active {
+  filter: blur(3px);
+  pointer-events: none;
+  user-select: none;
+}
+
+.pecs-card {
+  border: 1px solid rgba(0, 0, 0, .3);
+  cursor: pointer;
+  transition: 0.15s;
+}
+
+.pecs-card:hover {
+  background-color: rgb(218, 221, 227);
+  border: 1px solid rgba(0, 0, 0, .1);
+}
+
+.btn-sml-txt {
+  font-size: 14px;
+  margin: 0;
+  padding: 0;
+}
+
+.plus-button {
+  color: gray !important;
+  background-color: transparent;
+  border: none;
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+  cursor: pointer;
+  white-space: nowrap;
+  border-radius: 50%;
+  padding: 0px, 40px, 15px, 40px;
+  font-size: 80px;
+  margin: auto;
+}
+
+.play-button:hover {
+  background-color: rgb(197, 197, 197);
+  text-decoration: none;
+  color: white !important;
+}
+
+.feelings-btn-cnt {
+  display: grid;
+  justify-content: right;
+}
+
+.pecs-title {
+  margin-bottom: 0.1rem;
+  font-size:40px;
+}
+
+.pecs-desc {
+  text-align: center;
+}
+
+
+
+@keyframes slideInText {
+  0% {
+      transform: translateY(-100%);
+      opacity: 0;
+  }
+
+  100% {
+      transform: translateY(0);
+      opacity: 1; 
+  }
+}
+
+@keyframes pop-up-move {
+  0% {
+      top: -300px;
+      opacity: 0;
+  }
+
+  100% {
+      top: 0;
+      opacity: 1;
+  }
+}

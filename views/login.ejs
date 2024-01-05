@@ -13,36 +13,50 @@
 <div class="col-sm-6 col-sm-offset-3">
 
     <h1><span class="fa fa-sign-in"></span> Login</h1>
-
-    <% if (message.length > 0) { %>
-        <div class="alert alert-danger"><%= message %></div>
-    <% } %>
-
     <!-- LOGIN FORM -->
-    <form action="/login" method="post">
+    
+    <form>
+        <div class="error form-group"></div>
         <div class="form-group">
             <label>Email</label>
-            <input type="text" class="form-control" name="email">
+            <input type="text" class="form-control" name="email" id="username">
         </div>
         <div class="form-group">
             <label>Password</label>
-            <input type="password" class="form-control" name="password">
+            <input type="password" class="form-control" name="password" id="password">
         </div>
-
-        <button type="submit" class="btn btn-warning btn-lg">Login</button>
+        <button type="submit" class="btn btn-warning btn-lg">Signup</button>
     </form>
-
     <hr>
-
     <p>Need an account? <a href="/signup">Signup</a></p>
     <p>Or go <a href="/">home</a>.</p>
 
-    <div class="text-center">
-        <p>A demo by <a href="http://scotch.io">Scotch</a>.</p>
-        <p>Visit the <a href="http://scotch.io/tutorials/javascript/easy-node-authentication-setup-and-local">tutorial</a>.</p>
-    </div>
-
 </div>
 </div>
+<script>
+    const form = document.querySelector('form');
+    const username = document.querySelector('#username');
+    const password = document.querySelector('#password');
+    const display = document.querySelector('.error');
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        display.textContent = '';
+        try {
+            const res = await fetch('/api/auth/login', {
+                method: 'POST',
+                body: JSON.stringify({username: username.value, password: password.value}),
+                headers: {'Content-Type' : 'application/json'}
+            });
+            const data = await res.json();
+            if(res.status === 400 || res.status === 401) {
+                return display.textContent = '${data.message}. ${data.error ? data.error : \'\'}';
+            }
+            data.role === "Admin" ? location.assign('/admin') : location.assing('/basic');
+        }
+        catch(err) {
+            console.log(err.message);
+        }
+    });
+</script>
 </body>
 </html>

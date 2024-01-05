@@ -1,10 +1,4 @@
 /*
-
-
-const uri = 'mongodb+srv://murariurusalincosmin:Moisil123@nicolaepaulescu.nejcjki.mongodb.net/NodeAPI?retryWrites=true&w=majority'
-
-mongoose.set('strictQuery', false);
-
 async function connect() {
     try {
         await mongoose.connect(uri);
@@ -27,11 +21,15 @@ app.use((req, res) => {
 })
 */
 
+
+
+/*
 const express = require('express');
 const mongoose = require('mongoose');
 const flash = require('connect-flash');
 const session = require('express-session');
 const morgan = require('morgan');
+const path = require('path');
 
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
@@ -49,7 +47,7 @@ mongoose.connect(dbConfig.url); //db conneciton
 require('./config/passport')(passport); //->passport
 
 app.use(morgan('dev'));
-app.use(cookieParser());   /**/
+app.use(cookieParser());   
 app.use(bodyParser.json()); //get info from html forms
 app.use(bodyParser.urlencoded({extended: true}));
 
@@ -133,8 +131,8 @@ function isLoggedIn(req, res, next) {
     if(req.isAuthenticated()) {
         return next();
     }
-
     res.redirect('/');
+    return next();
 }
 
 
@@ -142,4 +140,124 @@ function isLoggedIn(req, res, next) {
 ///port setup
 app.listen(port, () => {
     console.log('App listening on port ' + port);
-});
+});*/
+/*
+const express = require('express');
+const path = require('path');
+const bodyParser = require('body-parser');
+const dotenv = require('dotenv');
+const mongoose = require('mongoose');
+const flash = require('connect-flash');
+const session = require('express-session');
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+
+const userRoutes = require('./app/routes.js');
+const User = require('./app/models/user.js');
+
+var port = process.env.PORT || 3000;
+var dbConfig = require('./config/database.js');
+
+
+const app = express();
+
+mongoose.connect(dbConfig.url);
+
+////MIDDLEWARE////
+//->session
+app.use(session({
+    secret: 'hospitalweb/devMaintain',
+    resave: true,
+    saveUninitialized: false
+}));
+
+//->passport
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy({usernameField : 'email'}, User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+//->flash
+app.use(flash());
+
+//->global
+app.use((req, res, next) => {
+    res.locals.success_msg = req.flash(('success_msg'));
+    res.locals.error_msg = req.flash(('error_msg'));
+    res.locals.error = req.flash(('error'));
+    res.locals.currentUser = req.user;
+    next();
+})
+
+//->bodyParser
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
+app.use(express.static('public'));
+
+app.use(userRoutes);
+
+app.listen(port, () => {
+    console.log('App listening on port ' + port);
+})*/
+
+const express = require('express');
+const mongoose = require('mongoose');
+const cookieParser = require('cookie-parser');
+
+const path = require('path');
+const dotenv = require('dotenv');
+const flash = require('connect-flash');
+const session = require('express-session');
+
+const connectDB = require('./config/database.js');
+
+var port = process.env.PORT || 3000;
+
+const app = express(); //open server
+app.use(express.json()); //use middleware
+
+process.on("unhandledRejection", err => {
+    console.log(`An error occurred: ${err.message}`)
+    server.close(() => process.exit(1))
+  });
+
+connectDB(); //connect to database
+
+app.use(session({
+    secret: 'hospitalweb/devMaintain',
+    resave: true,
+    saveUninitialized: false
+}));
+app.use(flash());
+app.use(cookieParser());
+
+app.use("/api/auth", require("./app/routes.js"));
+
+const {adminAuth, userAuth} = require("./config/specialAuth.js");
+
+
+app.use(express.static('public'));
+
+//normal routes
+app.get("/", (req, res) => res.render('home.ejs'));
+app.get("/register", (req, res) => res.render("register.ejs"));
+app.get("/login", (req, res) => res.render('login.ejs'));
+app.get("/admin", adminAuth, (req, res) => res.render('admin.ejs'));
+app.get("/basic", userAuth, (req, res) => res.render('user.ejs'));
+
+
+app.get("/logout", (req, res) => {
+    res.cookie("jwt", "", {maxAge: "1"});
+    res.redirect("/");
+})
+
+
+
+app.listen(port, () => {
+    console.log('App listening on port ' + port);
+})

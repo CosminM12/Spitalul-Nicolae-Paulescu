@@ -11,10 +11,13 @@ module.exports = function(passport) {
     });
 
 
-    passport.deserializeUser(function(user, done) {
-        User.findBy(id, function(err, user) {
+    passport.deserializeUser(function(id, done) {
+        /*User.findById(id, function(err, user) {
             done(err, user);
-        });
+        });*/
+        User.findById(id).catch(err => {
+            done(err, user);
+        })
     });
 
 ////LOCAL-LOGIN
@@ -28,17 +31,16 @@ module.exports = function(passport) {
             email = email.toLowerCase();
 
         process.nextTick(function() {
-            User.findOne({'local.email' : email}, function(err, user) {
-                if(err)
-                    return done(err);
-
+            User.findOne({'local.email' : email}).then(user => {
                 if(!user)
                     return done(null, false, req.flash('loginMessage', 'No user found'));
-
                 if(!user.validPassword(password))
                     return done(null ,false, req.flash('loginMessage', 'Wrong password'));
                 else
                     return done(null, user);
+                })
+            .catch(err => {
+                return done(err);
             });
         });
     }));
@@ -56,9 +58,7 @@ module.exports = function(passport) {
 
         process.nextTick(function() {
             if(!req.user) {
-                User.findOne({'local.email' : email}, function(err, user){
-                    if(err)
-                        return done(err);
+                User.findOne({'local.email' : email}).then(user => {
                     if(user){
                         return done(null, false, req.flash('signupMessage', 'That email is already taken'));
                     }
@@ -66,20 +66,20 @@ module.exports = function(passport) {
                         var newUser = new User();
                         newUser.local.email = email;
                         newUser.local.password = newUser.generateHash(password);
-
-                        newUser.save(function(err){
-                            if(err)
-                                return done(err);
+                        newUser.save().then(newUser => {
                             return done(null, newUser);
-                        });
+                        })
+                        .catch(err => {
+                            return done(err);
+                        })
                     }
-                });
+                    })
+                    .catch(err => {
+                        return done(err);
+                    });
             }
             else if(!req.user.local.email) {
-                User.findOne({ 'local.email' :  email }, function(err, user) {
-                    if (err)
-                        return done(err);
-                    
+                User.findOne({ 'local.email' :  email }).then(user => {
                     if (user) {
                         return done(null, false, req.flash('loginMessage', 'That email is already taken.'));
                         // Using 'loginMessage instead of signupMessage because it's used by /connect/local'
@@ -94,6 +94,9 @@ module.exports = function(passport) {
                             return done(null,user);
                         });
                     }
+                })
+                .catch(err => {
+                    return done(err);
                 });
             } else {
                 return done(null, req.user);

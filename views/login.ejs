@@ -51,7 +51,9 @@
             if(res.status === 400 || res.status === 401) {
                 return display.textContent = '${data.message}. ${data.error ? data.error : \'\'}';
             }
-            data.role === "Admin" ? location.assign('/admin') : location.assing('/basic');
+            //data.role === "Admin" ? location.assign('/') : location.assing('/');
+            const userData = encodeURIComponent(JSON.stringify(data.userData));
+            location.assign('/');
         }
         catch(err) {
             console.log(err.message);

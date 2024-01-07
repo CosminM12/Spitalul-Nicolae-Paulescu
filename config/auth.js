@@ -47,6 +47,7 @@ exports.login = async (req, res, next) => {
                     const token = jwt.sign({id: user._id, username, role: user.role}, jwtSecret, {expiresIn: maxAge});
                     res.cookie("jwt", token, {httpOnly:true, maxAge: maxAge*1000});
                     res.status(201).json({message: "Login successful", user: user._id});
+                    //res.redirect("/");
                 }
                 else {
                     res.status(400).json({message: "Login not successful"});

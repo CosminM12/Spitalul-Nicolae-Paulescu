@@ -74,23 +74,23 @@
                     <div class="collapse navbar-collapse middle-nav" id="navbarmain">
                         <ul class="navbar-nav">
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="index.html" data-toggle="dropdown"
+                                <a class="nav-link dropdown-toggle" href="/" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">Spital</a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="">Acasa</a></li>
-                                    <li><a class="dropdown-item" href="">Misiunea SJSNP</a></li>
-                                    <li><a class="dropdown-item" href="">Imagini</a></li>
+                                    <li><a class="dropdown-item" href="/">Acasa</a></li>
+                                    <li><a class="dropdown-item" href="/misiune">Misiunea SJNP</a></li>
+                                    <li><a class="dropdown-item" href="/imagini">Imagini</a></li>
                                 </ul>
                             </li>
-                            <li class="nav-item"><a class="nav-link" href="about.html">Activitate</a></li>
+                            <li class="nav-item"><a class="nav-link" href="programare">Programare</a></li>
             
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="department.html" id="dropdown02" data-toggle="dropdown"
                                     aria-haspopup="true" aria-expanded="false">Departamente </a>
-                                <ul class="dropdown-menu" aria-labelledby="dropdown02">
+                                <!-- <ul class="dropdown-menu" aria-labelledby="dropdown02">
                                     <li><a class="dropdown-item" href="department.html">Departamente</a></li>
                                     <li><a class="dropdown-item" href="department-single.html">Department</a></li>
-                                </ul>
+                                </ul> -->
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="blog-sidebar.html" id="dropdown05" data-toggle="dropdown"
@@ -106,21 +106,33 @@
                         </ul>
                     </div>
                 
-                <div class="login-nav" id="navbarmain">
-                    <ul class="navbar-nav">
-                        <div class="col"><li class="nav-item"><a class="nav-link" href="/login">Uz Intern</a></li></div>
-                        <div class="col">
-                            <li class="nav-item logo-item">
-                                <a class="img-logo" href="index.html">
-                                    <img class="img-logo" src="res/logo.png" />
-                                </a>
-                            </li>
-                        </div>
-                    </ul>
+                    <div class="login-nav" id="navbarmain">
+                        <ul class="navbar-nav">
+                            <div class="col">
+                                <li class="nav-item"> 
+                                    <a class="nav-link" id="userLogResult" href="/login">
+                                        <%if(authValue == -1){%>
+                                            Uz intern
+                                        <%}else if(authValue == 0){%>
+                                            Admin
+                                        <%}else if(authValue == 2){%>
+                                            Doctor
+                                        <%}else{%>
+                                            Pacient
+                                        <%}%>
+                                    </a>
+                                </li>
+                            </div>
+                            <div class="col">
+                                <li class="nav-item logo-item">
+                                    <a class="img-logo" href="index.html">
+                                        <img class="img-logo" src="res/logo.png" />
+                                    </a>
+                                </li>
+                            </div>
+                        </ul>
+                    </div>
                 </div>
-
-
-            </div>
             </nav>
         </header>
         

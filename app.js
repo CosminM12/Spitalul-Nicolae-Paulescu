@@ -208,6 +208,7 @@ app.listen(port, () => {
 const express = require('express');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
+const jwt = require('jsonwebtoken');
 
 const path = require('path');
 const dotenv = require('dotenv');
@@ -232,35 +233,25 @@ app.use(cookieParser());
 
 app.use("/api/auth", require("./app/routes.js"));
 
-const {adminAuth, doctorAuth, userAuth} = require("./config/specialAuth.js");
+// const {adminAuth, doctorAuth, userAuth, authenticate} = require("./config/specialAuth.js");
 
 
 app.use(express.static('public'));
+
 
 //normal routes
 //app.get("/", (req, res) => res.render('home.ejs'));
 app.get('/home', (req, res) => res.render('home.ejs'));
 app.get("/register", (req, res) => res.render("register.ejs"));
 app.get("/login", (req, res) => res.render('login.ejs'));
-app.get("/admin", adminAuth, (req, res) => res.render('admin.ejs'));
-app.get("/basic", userAuth, (req, res) => res.render('user.ejs'));
+// app.get("/admin", adminAuth, (req, res) => res.render('admin.ejs'));
+// app.get("/basic", userAuth, (req, res) => res.render('user.ejs'));
 
-/*app.get("/", (req, res) => {
-    if(adminAuth) {
-        res.render('home.ejs', {authValue: 0});
-    } else if (doctorAuth) {
-        res.render('home.ejs', {authValue: 1});
-    } else if(userAuth) {
-        res.render('home.ejs', {authValue: 2});
-    } else {
-        res.render('home.ejs', {authValue: -1});
-    }
-});*/
+// app.use(authenticate)
 
-app.get("/", adminAuth, (req, res) => res.render("home.ejs", {authValue:0}));
-app.get("/", doctorAuth, (req, res) => res.render("home.ejs", {authValue:1}));
-app.get("/", userAuth, (req, res) => res.render("home.ejs", {authValue:2}));
-app.get("/", (req, res) => res.render("home.ejs", {authValue:-1}));
+app.get("/", (req, res) => {
+    res.render("home.ejs", {role: req.user ? req.user.role : null});
+});
 
 app.get("/programare", (req, res) => res.render(""));
 

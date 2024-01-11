@@ -111,14 +111,14 @@
                             <div class="col">
                                 <li class="nav-item"> 
                                     <a class="nav-link" id="userLogResult" href="/login">
-                                        <%if(authValue == -1){%>
-                                            Uz intern
-                                        <%}else if(authValue == 0){%>
+                                        <%if(!role){%>
+                                            Uz Intern
+                                        <%}else if(role == "Admin"){%>
                                             Admin
-                                        <%}else if(authValue == 2){%>
+                                        <%}else if(role == "Doctor"){%>
                                             Doctor
                                         <%}else{%>
-                                            Pacient
+                                            Uz Intern
                                         <%}%>
                                     </a>
                                 </li>

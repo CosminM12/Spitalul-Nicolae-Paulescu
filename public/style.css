@@ -8,6 +8,22 @@ html {
   overflow-x: hidden;
 }
 
+.bg-img-container {
+  position: absolute;
+  overflow: hidden;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.first-banner-container {
+  background-size: cover;
+  background-image: url('./res/blur-hospital.jpg');
+  background-repeat: no-repeat;
+  width: 100%;
+}
+
 .login-nav {
   width: 25%;
 }
@@ -41,6 +57,7 @@ html {
 
 .big-icon {
   font-size: 75px;
+  color: black;
 }
 
 .items-body-container {
@@ -110,7 +127,7 @@ html {
 
 @media (min-width: 981px) {
   .items-body-container {
-    width: 17.6%;
+    width: 18.6%;
   }
 }
 

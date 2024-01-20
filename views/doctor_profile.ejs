@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Doctor Profile | SNP</title>
+    <meta name="description" content="User profile page | Simptoms" />
+    <meta name="keywords" content="profile, status" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="ro" />
+    <meta charset="utf-8" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="TestProfile-style.css" />
+    <link rel="icon" href="../public/logo.ico" tpye="img/ico" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <style>
+        .navbar {
+            width: 100% !important;
+            margin-bottom: 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <%- include("partials/header2.ejs") -%>
+    </header>
+    <div class="container" id="blur">
+        <div class="main-body">
+            <div class="row gutters-sm">
+                <div class="col-md-4 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex flex-column align-items-center text-center">
+
+                                <!--- TODO: change the icon of the profile pic based on gender --->
+
+                                <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin"
+                                    class="rounded-circle" width="150">
+                                <div class="mt-3">
+
+                                    <!--- TODO: change the name of the user from the login form --->
+
+                                    <h4 id="profileFullName"> <%=user.username%> <%=user.firstName%> <%=user.lastName%> </h4>
+                                    <p class="text-secondary mb-1" id="profileLevel"><%=user.department%></p>
+                                    <!-- TODO: what is this ? -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mt-3">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">Personal Informations</h5>
+                            <hr />
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <h6 class="mb-0">Full Name</h6>
+                                </div>
+                                <div class="col-sm-6 text-secondary" style="text-align:right">Joe</div>
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <h6 class="mb-0">Sex</h6>
+                                </div>
+                                <div class="col-sm-6 text-secondary" style="text-align:right">M (male)</div>
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <h6 class="mb-0">Creation Date</h6>
+                                </div>
+                                <div class="col-sm-6 text-secondary" style="text-align:right">12 May 2023</div>
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="col-sm-6"></div>
+                                <div class="col-sm-6 text-secondary" style="text-align:right">
+                                    <a class="btn btn-info " target="__blank" style="color:white;"
+                                        onclick="showPopUp2()">Edit</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+
+                    <div class="row-md-8">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title text-center">About Me</h5>
+                                <hr />
+                                <div class="row">
+
+                                    <!--- TODO: import this from the database --->
+
+                                    <div class="col-sm-12 text-secondary text-center" id="description">
+                                        This is a short description about me. My legal guardian has the right
+                                        to complete this with anything out of the ordinary that can help anyone
+                                        that has or will have acces to my profile page.
+                                    </div>
+                                </div>
+                                <hr />
+                                <div class="row">
+                                    <div class="col-9"></div>
+                                    <div class="col-3">
+                                        <a class="btn btn-info " target="__blank" style="color:white;"
+                                            onclick="showPopUpDetails()">Edit</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row-md-8">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h4 class="card-title text-center" id="appointmentList">Programari</h4>
+                                <% appointments.forEach(appointment => { %>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <h5 class=""><%=appointment.firstName%> <%= appointment.lastName%></h5>
+                                            <h6 class=""><%=appointment.telephone%></h6>
+                                        </div>
+                                        <div class="col-6">
+                                            <p><%= appointment.time%></p>
+                                            <p><%= appointment.date%></p>
+                                            <!-- <button type="button" class="btn btn-info btn-md">Details</button> -->
+                                        </div>
+                                    </div> 
+                                    <hr />
+                                <%});%>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <br /><br />
+        </div>
+    </div>
+    <hr class="footer-space" />
+    <%- include("partials/footer.ejs") -%>
+
+</body>
+
+</html>

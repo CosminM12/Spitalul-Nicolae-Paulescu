@@ -2,6 +2,21 @@ const jwt = require('jsonwebtoken');
 
 const jwtSecret = "0a12236513769e4ccc70b032e6500ef93ae338583bd5ff32321aec65d0620e3ac20ff0";
 
+exports.authAndLogIn = (req, res, next) => {
+    const token = req.cookies.jwt;
+
+    if(token) {
+        try {
+            const user = jwt.verify(token, jwtSecret);
+            req.user = user;
+        } catch(err) {
+            return res.status(403).json({message:"Not authorized"});
+        }
+    }
+
+    next();
+}
+
 exports.authenticate = (req, res, next) => {
     const token = req.cookies.jwt;
 
@@ -18,7 +33,18 @@ exports.authenticate = (req, res, next) => {
 
 };
 
-exports.adminAuth = (req, res, next) => {
+exports.isLoggedIn = (req, res, next) => {
+    if(req.user) {
+        return next();
+    }
+    else {    
+        return res.redirect("/login");
+    }
+};
+
+
+
+/*exports.adminAuth = (req, res, next) => {
     const token = req.cookies.jwt;
     if(token) {
         jwt.verify(token, jwtSecret, (err, decodedToken) => {
@@ -40,7 +66,7 @@ exports.adminAuth = (req, res, next) => {
     }
 }
 
-/*exports.doctorAuth = (req, res, next) => {
+exports.doctorAuth = (req, res, next) => {
     const token = req.cookies.jwt;
     if(token) {
         jwt.verify(token, jwtSecret, (err, decodedToken) => {

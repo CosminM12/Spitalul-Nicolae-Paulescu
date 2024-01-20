@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta name="description" content="Municipal Hospital internal and external website, made for medics and pacients" />
+        <!-- <meta name="description" content="Municipal Hospital internal and external website, made for medics and pacients" />
         <meta name="keywords" content="hospital, doctor, pacient, illness, disease" />
         <meta name="robots" content="index, login" />
         <meta name="language" content="ro" />
@@ -13,7 +13,9 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="icofont/icofont.min.css">
         
-        <link rel="stylesheet" type="text/css" href="style.css"/>
+        <link rel="stylesheet" type="text/css" href="style.css"/> -->
+        <title>Nicolae Paulescu | Home</title>
+        <%- include('partials/head.ejs') -%>
     </head>
     <body id="blur">
         <header>
@@ -67,147 +69,92 @@
                     </div>
                 </div>
             </div>
-
+            <%- include('partials/header.ejs') -%>
             <!-- MAIN NAVBAR MENU -->
-            <nav class="navbar navbar-expand-lg navigation nav-regular" id="navbar">
-                <div class="container">
-                    <div class="collapse navbar-collapse middle-nav" id="navbarmain">
-                        <ul class="navbar-nav">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="/" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">Spital</a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="/">Acasa</a></li>
-                                    <li><a class="dropdown-item" href="/misiune">Misiunea SJNP</a></li>
-                                    <li><a class="dropdown-item" href="/imagini">Imagini</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item"><a class="nav-link" href="programare">Programare</a></li>
-            
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="department.html" id="dropdown02" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">Departamente </a>
-                                <!-- <ul class="dropdown-menu" aria-labelledby="dropdown02">
-                                    <li><a class="dropdown-item" href="department.html">Departamente</a></li>
-                                    <li><a class="dropdown-item" href="department-single.html">Department</a></li>
-                                </ul> -->
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="blog-sidebar.html" id="dropdown05" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">Informatii publice</a>
-                                <ul class="dropdown-menu" aria-labelledby="dropdown05">
-                                    <li><a class="dropdown-item" href="blog-sidebar.html">Anunturi</a></li>
-                                    <li><a class="dropdown-item" href="blog-sidebar.html">Concursuri</a></li>
-                                    <li><a class="dropdown-item" href="blog-sidebar.html">Relatii cu publicul</a></li>
-                                    <li><a class="dropdown-item" href="blog-sidebar.html">Protectia datelor</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-                        </ul>
-                    </div>
-                
-                    <div class="login-nav" id="navbarmain">
-                        <ul class="navbar-nav">
-                            <div class="col">
-                                <li class="nav-item"> 
-                                    <a class="nav-link" id="userLogResult" href="/login">
-                                        <%if(!role){%>
-                                            Uz Intern
-                                        <%}else if(role == "Admin"){%>
-                                            Admin
-                                        <%}else if(role == "Doctor"){%>
-                                            Doctor
-                                        <%}else{%>
-                                            Uz Intern
-                                        <%}%>
-                                    </a>
-                                </li>
-                            </div>
-                            <div class="col">
-                                <li class="nav-item logo-item">
-                                    <a class="img-logo" href="index.html">
-                                        <img class="img-logo" src="res/logo.png" />
-                                    </a>
-                                </li>
-                            </div>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
         </header>
         
-        <section class="banner">
-            <span class="banner-background-wrap">
-                <span class="banner-background"></span>
-            </span>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6 col-md-12 col-xl-7">
-                        <div class="block">
-                            <div class="divider mb-3"></div>
-                            <span class="text-uppercase text-sm letter-spacing ">Solutii de medicina totala</span>
-                            <h1 class="mb-2 mt-2">Fii in siguranta! </h1>
-    
-                            <p class="mb-2 pr-5"> Nu te-ai simtit prea bine zilele astea? Ai racit sau te-a deranjat ceva? </p>  
-                            <p>Spitalul "Nicolae Paulescu" va asigura cele mai bune ingrijiri medicale disponibile in tara si este locul perfect pentru un control. Fa-ti acum o programare si vino la noi!</p>
-                            <div class="btn-container ">
-                                <a href="appoinment.html" target="_blank"
-                                    class="btn btn-main btn-icon btn-round">Programare <i
-                                        class="icofont-simple-right ml-2  "></i></a>
+        <section class="banner" style="position:relative">
+            <!-- <span class="bg-img-container">
+                <span class="first-banner-container"></span>
+            </span> -->
+            <!-- <div class="first-banner-container"> -->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-12 col-xl-7">
+                            <div class="block">
+                                <div class="divider mb-3"></div>
+                                <span class="text-uppercase text-sm letter-spacing ">Solutii de medicina totala</span>
+                                <h1 class="mb-2 mt-2">Fii in siguranta! </h1>
+        
+                                <p class="mb-2 pr-5"> Nu te-ai simtit prea bine zilele astea? Ai racit sau te-a deranjat ceva? </p>  
+                                <p>Spitalul "Nicolae Paulescu" va asigura cele mai bune ingrijiri medicale disponibile in tara si este locul perfect pentru un control. Fa-ti acum o programare si vino la noi!</p>
+                                <div class="btn-container ">
+                                    <a href="/programare" target="_blank"
+                                        class="btn btn-main btn-icon btn-round">Programare <i
+                                            class="icofont-simple-right ml-2  "></i></a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="list-items-container">
-                    <div class="items-body-container-first text-left">
-                        <div class="text-container mr-3">
-                            <h2 class="mb-3 mt-3">Informatii Generale</h3>
+                    <div class="list-items-container">
+                        <div class="items-body-container-first text-left">
+                            <div class="text-container mr-3">
+                                <h2 class="mb-3 mt-3">Informatii Generale</h3>
+                            </div>
                         </div>
+                        <div class="row list-items-body">
+                            <div class="items-body-container">
+                                <div class="item-container">
+                                    <a href="/">
+                                    <div class="image-item-container text-center">
+                                        <i class="icofont-heart-beat big-icon"></i>
+                                    </div>
+                                    <div class="items-text-container text-center mt-2">
+                                        <h3 class="cards-text">Sanatate Zilnica</h3>
+                                    </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="items-body-container">
+                                <div class="item-container">
+                                    <a href="/">
+                                    <div class="image-item-container text-center">
+                                        <i class="icofont-doctor big-icon"></i>
+                                    </div>
+                                    <div class="text-container text-center mt-2">
+                                        <h3 class="cards-text">Doctori</h3>
+                                    </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="items-body-container">
+                                <a href="/">
+                                <div class="item-container">
+                                    <div class="image-item-container text-center">
+                                        <i class="icofont-injection-syringe big-icon"></i>
+                                    </div>
+                                    <div class="text-container text-center mt-2">
+                                        <h3 class="cards-text">Vacciuri</h3>
+                                    </div>
+                                </div>
+                                </a>
+                            </div>
+                            <div class="items-body-container">
+                                <a href="/programare">
+                                    <div class="item-container">
+                                        <div class="image-item-container text-center">
+                                            <i class="icofont-phone big-icon"></i>
+                                        </div>
+                                        <div class="text-container text-center mt-2">
+                                            <h3 class="cards-text">Programare</h3>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div> 
                     </div>
-                    <div class="row list-items-body">
-                        <div class="items-body-container">
-                            <div class="item-container">
-                                <div class="image-item-container text-center">
-                                    <i class="icofont-heart-beat big-icon"></i>
-                                </div>
-                                <div class="items-text-container text-center mt-2">
-                                    <h3 class="cards-text">Sanatate Zilnica</h3>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="items-body-container">
-                            <div class="item-container">
-                                <div class="image-item-container text-center">
-                                    <i class="icofont-doctor big-icon"></i>
-                                </div>
-                                <div class="text-container text-center mt-2">
-                                    <h3 class="cards-text">Doctori</h3>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="items-body-container">
-                            <div class="item-container">
-                                <div class="image-item-container text-center">
-                                    <i class="icofont-injection-syringe big-icon"></i>
-                                </div>
-                                <div class="text-container text-center mt-2">
-                                    <h3 class="cards-text">Vacciuri</h3>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="items-body-container">
-                            <div class="item-container">
-                                <div class="image-item-container text-center">
-                                    <i class="icofont-phone big-icon"></i>
-                                </div>
-                                <div class="text-container text-center mt-2">
-                                    <h3 class="cards-text">Programare</h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div> 
                 </div>
-            </div>
+            <!-- </div> -->
         </section>
         <section class="section about">
             <div class="container">
@@ -383,7 +330,7 @@
                         <div class="col-lg-6">
                             <div class="copyright">
                                 &copy; Proiectul <span class="text-color">"Nicolae Paulescu"</span> creat de <a
-                                    href="" target="_blank">M.R. Cosmin</a> and <a href="" target="_blank">T. Alexandra</a>
+                                    href="" target="_blank">M.R. Cosmin</a> si <a href="" target="_blank">T. Alexandra</a>
                             </div>
                             <div class="copyright text-center">
                             <!--&copy;-->  <span class="text-color text-center"><a href="http://info.tm.edu.ro" target="_blank">Liceul Teoretic "Grigore Moisil"</a> 2024</span></div>

@@ -36,6 +36,18 @@ const UserSchema = new mongoose.Schema({
         unique: true,
         required: true,
     },
+    firstName: {
+        type: String,
+        required: true,
+    },
+    lastName: {
+        type: String,
+        required: true,
+    },
+    telephone: {
+        type: String,
+        required: true,
+    },
     password: {
         type: String,
         minlength: 6,
@@ -44,8 +56,11 @@ const UserSchema = new mongoose.Schema({
     role: {
         type: String,
         default: "Basic",
-        // required: true,
     },
+    department: {
+        type: String,
+        default: "None"
+    }
 });
 
 module.exports = mongoose.model('User', UserSchema);

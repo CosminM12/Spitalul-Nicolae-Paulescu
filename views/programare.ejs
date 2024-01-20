@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="description" content="Orbitor,business,company,agency,modern,bootstrap4,tech,software">
+
+  <title>Programare | SNP</title>
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico" />
+
+  <!-- bootstrap.min css -->
+  <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css">
+  <!-- Icon Font Css -->
+  <link rel="stylesheet" href="plugins/icofont/icofont.min.css">
+  <!-- Slick Slider  CSS -->
+  <link rel="stylesheet" href="plugins/slick-carousel/slick/slick.css">
+  <link rel="stylesheet" href="plugins/slick-carousel/slick/slick-theme.css">
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="style2.css">
+  <style>
+     .make-appointment {
+      color: white !important;
+     }
+     .make-appointment:hover {
+      background-color: rgb(91, 91, 195) !important;
+      border-color: rgb(91, 91, 195) !important;
+     }
+  </style>
+</head>
+
+<body id="top">
+
+<header>
+  <%- include("partials/header2.ejs") -%>
+</header>
+	
+
+<section class="page-title bg-1">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="block text-center">
+          <span class="text-white">Pastreaza-ti un loc</span>
+          <h1 class="text-capitalize mb-5 text-lg">Programare</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="appoinment section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4">
+          <div class="mt-3">
+            <div class="feature-icon mb-3">
+              <i class="icofont-support text-lg"></i>
+            </div>
+             <span class="h3">Numar in caz de urgente</span>
+              <h2 class="text-color mt-3">112 </h2>
+          </div>
+      </div>
+
+      <div class="col-lg-8">
+           <div class="appoinment-wrap mt-5 mt-lg-0 pl-lg-5">
+            <h2 class="mb-2 title-color">Fa-ti o programare</h2>
+            <p class="mb-4">Selecteaza doctorul preferat si data si ora la care doriti si puteti sa veniti sa va verifice</p>
+               <form id="#" class="appoinment-form" method="post" action="#">
+                <div class="row">
+                  <div class="error form-group" id="errorContainer"></div>
+                </div>    
+                <div class="row">
+                         <div class="col-lg-6">
+                            <div class="form-group">
+                                <select class="form-control" id="departmentSelection">
+                                  <option value="blankField">Choose Department</option>
+                                  <option value="Cardiology">Cardiology</option>
+                                  <option value="Oncology">Oncology</option>
+                                  <option value="Neurology">Neurology</option>
+                                  <option value="Physical Therapy">Physical Therapy</option>
+                                  <option value="Pediatry">Pediatry</option>
+                                  <option value="Psychology">Psychology</option>
+                                  <option value="General">General</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <select class="form-control" id="doctorSelection">
+                                  <option value="blankField">-choose department first-</option>
+                                </select>
+                            </div>
+                        </div>
+
+                         <div class="col-lg-6">
+                            <div class="form-group">
+                                <input name="date" id="dateSelection" type="text" class="form-control" placeholder="dd/mm/yyyy">
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <!-- <input name="time" id="time" type="text" class="form-control" placeholder="Time"> -->
+                              <select class="form-control" id="timeSelection">
+                                <option value="blankField">-enter date first-</option>
+                              </select>  
+                            </div>
+                        </div>
+                         <div class="col-lg-6">
+                            <div class="form-group">
+                                <input name="name" id="name" type="text" class="form-control" placeholder="Full Name">
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <input name="phone" id="phone" type="tel" class="form-control" placeholder="Phone Number">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group-2 mb-4">
+                        <textarea name="message" id="message" class="form-control" rows="6" placeholder="Your Message"></textarea>
+                    </div>
+
+                    <a class="btn btn-main btn-round-full make-appointment" id="makeAppointment">Make Appoinment<i class="icofont-simple-right ml-2"></i></a>
+                </form>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- footer Start -->
+<%- include("partials/footer.ejs") -%>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const departmentSelect = document.getElementById('departmentSelection');
+      const errorDisplay = document.getElementById('errorContainer');
+      const doctorSelect = document.getElementById('doctorSelection');
+      const dateSelect = document.getElementById('dateSelection');
+      const timeSelect = document.getElementById('timeSelection');
+      const nameInput = document.getElementById('name');
+      const phoneInput = document.getElementById('phone');
+      const messageText = document.getElementById('message');
+      
+      let enteredDate = dateSelect.value;
+      let selectedDoctorId = doctorSelect.options[doctorSelect.selectedIndex].value;
+
+      departmentSelect.addEventListener('change', async () => {
+        const selectedDepartment = departmentSelect.value;
+        // console.log(`enter with value ${selectedDepartment}`);
+        try {
+          const response = await fetch(`api/doctors?department=${selectedDepartment}`);
+          const doctors = await response.json();
+
+          if(doctors.length === 0) {
+            cosnole.log("Nod doctors were found");
+            return;
+          }
+
+          doctorSelect.innerHTML = '';
+
+          const blankOption = document.createElement('option');
+          blankOption.value = "blankField";
+          blankOption.text = "Select Doctors";
+          doctorSelect.appendChild(blankOption);
+
+          doctors.forEach(doctor => {
+            const option = document.createElement('option');
+            option.value = doctor._id;
+            option.text = doctor.firstName + ' ' + doctor.lastName;;
+            doctorSelect.appendChild(option);
+          });
+        }
+        catch (err) {
+          console.log('Error fetching data: ', error);
+        }
+      });
+
+      doctorSelect.addEventListener('change', () => {
+        selectedDoctorId = doctorSelect.options[doctorSelect.selectedIndex].value;
+      });
+
+      dateSelect.addEventListener('input', () => {
+        errorDisplay.textContent = '';
+
+        enteredDate = dateSelect.value;
+
+        //check date format
+        const dateRegex = /^(\d{2})\/(\d{2})\/(\d{5})$/;
+        if(dateRegex.test(enteredDate)) {
+          errorContainer.textContent = 'Invalid date format (dd/mm/yyyy)';
+          return;
+        }
+
+        const parts = enteredDate.split('/');
+        const day = parseInt(parts[0], 10);
+        const month = parseInt(parts[1], 10) - 1;
+        const year = parseInt(parts[2], 10);
+        const isValidDate = !isNaN(day) && !isNaN(month) && !isNaN(year);
+        if(!isValidDate || new Date(year, month, day).toString() === 'Invalid Date') {
+          const currentDate = new Date().toDateString();
+          errorDisplay.textContent = 'Invalid date';
+          return;
+        }
+
+        const currentDate = new Date();
+        if(new Date(year, month, day) < currentDate) {
+          errorContainer.textContent = 'Entered date must be in the future';
+          return;
+        }
+        if(day < 1 || month < 0 || month > 11) {
+          errorContainer.textContent = "Day or month wrong";
+        }
+        const longMonth = [0, 2, 4, 6, 7, 9, 11].includes(month);
+        if(longMonth && day>31) {
+          errorContainer.textContent = 'This date does not exist';
+          return;
+        }
+
+        const shortMonth = [3, 5, 8, 10].includes(month);
+        if(shortMonth && day>30) {
+          errorContainer.textContent = 'This date does not exist';
+          return;
+        }
+
+        const isLeapYear = ((year % 4 === 0 && year%100 !==0) || year%400===0);
+        const febDays = isLeapYear ? 29 : 28;
+        if(day>febDays) {
+          errorContainer.textContent = 'February does not have that date';
+          return;
+        }
+
+        if(selectedDoctorId !== "-choose department first-") {
+          fetch(`/api/appointments?validatedDate=${enteredDate}&doctorId=${selectedDoctorId}`)
+          .then(response => {
+            if(!response.ok) {
+              throw new Error('Failed to fetch appointments');
+            }
+            return response.json();
+          })
+          .then(appointments => {
+            timeSelect.innerHTML = '';
+
+            const blankOption = document.createElement('option');
+            blankOption.value = "blankField";
+            blankOption.text = "Select time";
+            timeSelect.appendChild(blankOption);
+
+            const startHour = 8;
+            const endHour = 16;
+            const interval = 60;
+            // appointments.forEach(appointment => {
+            //   console.log(appointment.time);
+            // });
+            for(let hour = startHour;hour <= endHour;hour++) {
+              const time = `${hour}:00`;
+              const isTimeAvailable = !appointments.some(appointment => appointment.time === time);
+              if(isTimeAvailable) {
+                const option = document.createElement('option');
+                option.value = time;
+                option.text = time;
+                timeSelection.appendChild(option);
+              }
+            }
+          }) . catch(err => {
+            console.error('Error fetching appointments:', err);
+          })
+        } else {
+          errorContainer.textContent = 'Please select the department and doctor';
+          return;
+        }
+      });
+    
+      const submitBtn = document.getElementById('makeAppointment');
+      submitBtn.addEventListener('click', async () => {
+        if(departmentSelect.value === "blankField" || doctorSelect.value === "blankField" || timeSelect.value === "blankField") {
+          errorDisplay.textContent = 'Please select an option for the blank fields';
+          return;
+        }
+
+        const enteredName = nameInput.value.trim();
+        if(!enteredName) {
+          errorDisplay.textContent = 'Please enter your name';
+          return;
+        }
+
+        const enteredPhone = phoneInput.value.trim();
+        const phoneRegex = /^\d{10}$/;
+        if(!phoneRegex.test(enteredPhone)) {
+          errorDisplay.textContent = 'Invalid phone number';
+          return;
+        }
+
+        const enteredMessage = messageText.value.trim();
+        if(!enteredMessage) {
+          errorDisplay.textContent = 'Please enter a message';
+          return;
+        }
+        
+        
+        const userId = enteredName;
+        
+        const appointmentData = {
+            doctorId: selectedDoctorId,
+            userId: userId,
+            date: enteredDate,
+            time: timeSelect.value,
+            message: enteredMessage,
+            telephone: enteredPhone
+        };
+        try {
+          const response = await fetch("/api/appointments", {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(appointmentData),
+          });
+          if(response.ok) {
+            console.log('Appointment created successfully');
+          }
+          else {
+            console.error('Failed to create appointment');
+          }
+          location.assign("/");
+        } catch(err) {
+          console.error('Error creating appointment', err);
+        }
+      });
+    });
+
+
+  </script>
+    
+
+    <script src="plugins/google-map/map.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkeLMlsiwzp6b3Gnaxd86lvakimwGA6UA&callback=initMap"></script>
+  </body>
+  </html>

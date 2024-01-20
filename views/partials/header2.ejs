@@ -38,21 +38,8 @@
         <div class="login-nav" id="navbarmain">
             <ul class="navbar-nav">
                 <div class="col">
-                    <li class="nav-item"> 
-                            <%if(!role){%>
-                                <a class="nav-link" id="userLogResult" href="/login">
-                                Uz Intern
-                            <%}else if(role == "Admin"){%>
-                                <a class="nav-link" id="userLogResult" href="/admin">
-                                Admin
-                            <%}else if(role == "Doctor"){%>
-                                <a class="nav-link" id="userLogResult" href="/doctor">
-                                Doctor
-                            <%}else{%>
-                                <a class="nav-link" id="userLogResult" href="/user">
-                                User
-                            <%}%>
-                        </a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">Log Out</a>
                     </li>
                 </div>
                 <div class="col">

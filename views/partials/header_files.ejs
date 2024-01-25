@@ -1,9 +1,9 @@
-<nav class="navbar navbar-expand-lg navigation nav-regular" id="navbar">
+<nav class="navbar navbar-expand-lg navigation nav-regular" id="navbar" style="background-color:var(--color-dark-blue-1);">
     <div class="container">
         <div class="collapse navbar-collapse middle-nav" id="navbarmain">
             <ul class="navbar-nav">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="/" data-toggle="dropdown"
+                    <a style="color:white;" class="nav-link dropdown-toggle" href="/" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">Spital</a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="/">Acasa</a></li>
@@ -11,18 +11,15 @@
                         <li><a class="dropdown-item" href="/imagini">Imagini</a></li>
                     </ul>
                 </li>
-                <li class="nav-item"><a class="nav-link" href="/programare">Programare</a></li>
+                <li class="nav-item"><a style="color:white;" class="nav-link" href="/programare">Programare</a></li>
 
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="/departamente" id="dropdown02" data-toggle="dropdown"
+                    <a  style="color:white;" class="nav-link dropdown-toggle" href="/departamente" id="dropdown02" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">Departamente </a>
-                    <!-- <ul class="dropdown-menu" aria-labelledby="dropdown02">
-                        <li><a class="dropdown-item" href="department.html">Departamente</a></li>
-                        <li><a class="dropdown-item" href="department-single.html">Department</a></li>
-                    </ul> -->
+
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="/anunturi" id="dropdown05" data-toggle="dropdown"
+                    <a style="color:white;" class="nav-link dropdown-toggle" href="/anunturi" id="dropdown05" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">Informatii publice</a>
                     <ul class="dropdown-menu" aria-labelledby="dropdown05">
                         <li><a class="dropdown-item" href="/anunturi">Anunturi</a></li>
@@ -31,15 +28,28 @@
                         <li><a class="dropdown-item" href="blog-sidebar.html">Protectia datelor</a></li>
                     </ul>
                 </li>
-                <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
+                <li class="nav-item"><a style="color:white;" class="nav-link" href="/contact">Contact</a></li>
             </ul>
         </div>
     
         <div class="login-nav" id="navbarmain">
             <ul class="navbar-nav">
                 <div class="col">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/logout">Log Out</a>
+                    <li class="nav-item"> 
+                            <%if(!role){%>
+                                <a style="color:white;" class="nav-link" id="userLogResult" href="/login">
+                                Uz Intern
+                            <%}else if(role == "Admin"){%>
+                                <a style="color:white;" class="nav-link" id="userLogResult" href="/admin">
+                                Admin
+                            <%}else if(role == "Doctor"){%>
+                                <a style="color:white;" class="nav-link" id="userLogResult" href="/doctor">
+                                Doctor
+                            <%}else{%>
+                                <a style="color:white;" class="nav-link" id="userLogResult" href="/user">
+                                User
+                            <%}%>
+                        </a>
                     </li>
                 </div>
                 <div class="col">

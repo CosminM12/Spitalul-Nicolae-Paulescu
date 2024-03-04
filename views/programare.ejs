@@ -99,13 +99,13 @@
                 <div class="col-lg-6">
                   <div class="form-group">
                     <select class="form-control" id="departmentSelection">
-                      <option value="blankField">Choose Department</option>
-                      <option value="Cardiology">Cardiology</option>
-                      <option value="Oncology">Oncology</option>
-                      <option value="Neurology">Neurology</option>
-                      <option value="Physical Therapy">Physical Therapy</option>
-                      <option value="Pediatry">Pediatry</option>
-                      <option value="Psychology">Psychology</option>
+                      <option value="blankField">Alege Departament</option>
+                      <option value="Cardiology">Cardiologie</option>
+                      <option value="Oncology">Oncologie</option>
+                      <option value="Neurology">Neurologie</option>
+                      <option value="Physical Therapy">Terapie Fizica</option>
+                      <option value="Pediatry">Pediatrie</option>
+                      <option value="Psychology">Psihologie</option>
                       <option value="General">General</option>
                     </select>
                   </div>
@@ -113,7 +113,7 @@
                 <div class="col-lg-6">
                   <div class="form-group">
                     <select class="form-control" id="doctorSelection">
-                      <option value="blankField">-choose department first-</option>
+                      <option value="blankField">-alege departamentul-</option>
                     </select>
                   </div>
                 </div>
@@ -128,28 +128,28 @@
                   <div class="form-group">
                     <!-- <input name="time" id="time" type="text" class="form-control" placeholder="Time"> -->
                     <select class="form-control" id="timeSelection">
-                      <option value="blankField">-enter date first-</option>
+                      <option value="blankField">-introduceti data-</option>
                     </select>
                   </div>
                 </div>
                 <div class="col-lg-6">
                   <div class="form-group">
-                    <input name="name" id="name" type="text" class="form-control" placeholder="Full Name">
+                    <input name="name" id="name" type="text" class="form-control" placeholder="Nume complet">
                   </div>
                 </div>
 
                 <div class="col-lg-6">
                   <div class="form-group">
-                    <input name="phone" id="phone" type="tel" class="form-control" placeholder="Phone Number">
+                    <input name="phone" id="phone" type="tel" class="form-control" placeholder="Numar de telefon">
                   </div>
                 </div>
               </div>
               <div class="form-group-2 mb-4">
                 <textarea name="message" id="message" class="form-control" rows="6"
-                  placeholder="Your Message"></textarea>
+                  placeholder="Mesajul tau"></textarea>
               </div>
 
-              <a class="btn btn-main btn-round-full make-appointment" id="makeAppointment">Make Appoinment<i
+              <a class="btn btn-main btn-round-full make-appointment" id="makeAppointment">Creaza Programare<i
                   class="icofont-simple-right ml-2"></i></a>
             </form>
           </div>
@@ -193,7 +193,7 @@
 
             const blankOption = document.createElement('option');
             blankOption.value = "blankField";
-            blankOption.text = "Select Doctors";
+            blankOption.text = "Selecteaza Doctor";
             doctorSelect.appendChild(blankOption);
 
             doctors.forEach(doctor => {
@@ -263,7 +263,7 @@
             return;
           }
 
-          if (selectedDoctorId !== "-choose department first-") {
+          if (selectedDoctorId !== "-alege departamentul-") {
             fetch(`/api/appointments?validatedDate=${enteredDate}&doctorId=${selectedDoctorName}`)
               .then(response => {
                 if (!response.ok) {

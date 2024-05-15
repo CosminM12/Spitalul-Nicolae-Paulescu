@@ -162,6 +162,10 @@ app.get("/chirurgie", authenticate, (req, res) => {
     res.render("chirurgie.ejs", {role: req.user ? req.user.role : null});
 });
 
+app.get("/radiologie", authenticate, (req, res) => {
+    res.render("radiologie.ejs", {role: req.user ? req.user.role : null});
+})
+
 app.get("/contact", authenticate, (req, res) => {
     res.render("contact.ejs", {role: req.user ? req.user.role : null});
 });
